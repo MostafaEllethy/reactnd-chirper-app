@@ -1,13 +1,16 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { handleInitialData } from '../actions/shared'
 
-class App extends Component {
-  render() {
+const App = (props) => {
+    useEffect(() => {
+        props.dispatch(handleInitialData())
+    }, [])
     return (
-      <div>
-        Starter Code
-      </div>
+        <div>
+            Starter Code
+        </div>
     )
-  }
 }
 
-export default App
+export default connect()(App)
