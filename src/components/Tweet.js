@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { formatTweet, formatDate } from '../utils/helpers'
 import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti'
 import { useCallback } from 'react'
+import { handleToggleTweet } from '../actions/tweets'
 
 export default connect(({ authUser, users, tweets }, { id }) => {
     const tweet = tweets[id]
@@ -10,13 +11,19 @@ export default connect(({ authUser, users, tweets }, { id }) => {
         tweet: formatTweet(tweet, users[tweet.author], authUser, tweets[tweet.replyingTo])
     }
 })((props) => {
-    const { name, avatar, timestamp, text, hasLiked, likes, replies, id, parent } = props.tweet
+    const { dispatch, tweet, authUser } = props
+    const { name, avatar, timestamp, text, hasLiked, likes, replies, id, parent } = tweet
     const toParent = useCallback((e, id) => {
         e.preventDefault()
     }, [])
     const handleLike = useCallback((e) => {
         e.preventDefault()
-    }, [])
+        dispatch(handleToggleTweet({
+            tweetId: id,
+            authUser,
+            hasLiked
+        }))
+    }, [hasLiked])
     return <div className='tweet'>
         <img src={avatar} alt={`Avatar for ${name}`} className='avatar' />
 

@@ -4,7 +4,7 @@ import { receiveTweets } from '../actions/tweets'
 import { setAuthUser } from '../actions/authUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
-const AUTH_USER_ID = 'sarah_edo'
+const AUTH_USER_ID = 'tylermcginnis'
 
 export const handleInitialData = () => {
     return (dispatch) => {
